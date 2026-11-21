@@ -1,14 +1,16 @@
 # NeuroBingo
 
-Um bingo de momentos improváveis com temas visuais, áudio original, salvamento local, exportação de cartela e três minijogos.
+Um bingo de momentos improváveis com identidade visual própria, áudio original, salvamento local, exportação de cartela e três minijogos.
 
-## Como abrir
+## Abrir o jogo
 
-1. Extraia a pasta `neurobingo`.
-2. Abra `index.html` no Chrome, Edge, Firefox ou outro navegador moderno.
-3. Clique em qualquer casa para marcar. Use **Editar** para trocar uma frase.
+O arquivo da raiz (\`index.html\`) carrega o jogo e recompõe seus recursos no navegador.
 
-O projeto não precisa de instalação, servidor, conta, biblioteca externa, fonte remota ou conexão com a internet. Os sons são sintetizados em tempo real com a Web Audio API.
+- **GitHub Pages:** no repositório, abra **Settings → Pages**, selecione **Deploy from a branch**, escolha a branch \`main\` e a pasta \`/(root)\`, depois salve. Quando o GitHub terminar a publicação, o endereço do Pages aparecerá nessa tela.
+- **Localmente:** execute \`python -m http.server 8000\` na pasta do repositório e acesse \`http://localhost:8000\`.
+- Use um navegador moderno com suporte a \`DecompressionStream\`, \`localStorage\`, Canvas e Web Audio API.
+
+Não abra a página por \`file://\`: o carregador precisa buscar os arquivos do pacote por HTTP.
 
 ## O que tem
 
@@ -17,23 +19,36 @@ O projeto não precisa de instalação, servidor, conta, biblioteca externa, fon
 - Oito temas: Neon Noir, Nórdico, Horror, Cyberpunk, 8-Bit, Sakura, Abismo e Arcade 80s.
 - Três pacotes de frases, além de lista personalizada.
 - Opção de casa livre no centro em cartelas ímpares.
-- Sons originais sintetizados em tempo real, com variações por tema para marcação, desmarcação, linha, bingo e minijogos.
+- Sons sintetizados em tempo real, com variações por tema para marcação, desmarcação, linha, bingo e minijogos.
 - Salvamento automático no armazenamento local do navegador.
 - Exportação e importação de estado em JSON.
-- Exportação de cartela em PNG, sem biblioteca externa.
+- Exportação de cartela em PNG.
 - Três minijogos: Reflexo duvidoso, Memória de peixe e Spam sem propósito.
 - Layout adaptado para desktop e celular.
 
 ## Salvamento e privacidade
 
-O estado da cartela fica no `localStorage` do navegador e não é enviado para nenhum servidor. O botão **Exportar dados** gera um arquivo JSON que pode ser importado em outro navegador/dispositivo. Para transferir o progresso, exporte o JSON e depois importe o mesmo arquivo no outro dispositivo.
+O estado da cartela fica no \`localStorage\` do navegador e não é enviado para nenhum servidor. Use **Exportar dados** para criar um JSON de backup ou transferir o progresso para outro dispositivo.
 
-## Estrutura
+## Restaurar os arquivos-fonte
 
-```text
-neurobingo/
+Para obter os arquivos HTML, CSS, JavaScript e SVG separados numa pasta \`source/\`, instale o Node.js e execute na raiz do repositório:
+
+\`\`\`bash
+node tools/unpack.mjs
+\`\`\`
+
+Também é possível indicar outra pasta de destino:
+
+\`\`\`bash
+node tools/unpack.mjs ./meus-fontes
+\`\`\`
+
+A estrutura restaurada contém:
+
+\`\`\`text
+source/
 ├── index.html
-├── README.md
 ├── assets/
 │   └── neurobingo.svg
 ├── css/
@@ -42,13 +57,6 @@ neurobingo/
     ├── app.js
     ├── audio.js
     └── minigames.js
-```
+\`\`\`
 
-## Personalização
-
-- **Temas:** edite as variáveis CSS no início de `css/styles.css`.
-- **Pacotes de frases:** edite `PACKS` no início de `js/app.js`.
-- **Sons:** edite os padrões em `js/audio.js`.
-- **Minijogos:** cada jogo está isolado em `js/minigames.js`.
-
-Compatível com navegadores modernos que suportem `localStorage`, `Canvas` e `Web Audio API`.
+Os dados originais são armazenados em partes compactadas em \`assets/bundle/\`; o carregador da raiz monta o jogo para publicação no GitHub Pages.
