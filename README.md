@@ -4,13 +4,13 @@ Um bingo de momentos improváveis com identidade visual própria, áudio origina
 
 ## Abrir o jogo
 
-O arquivo da raiz (\`index.html\`) carrega o jogo e recompõe seus recursos no navegador.
+O arquivo index.html da raiz carrega o jogo e recompõe seus recursos no navegador.
 
-- **GitHub Pages:** no repositório, abra **Settings → Pages**, selecione **Deploy from a branch**, escolha a branch \`main\` e a pasta \`/(root)\`, depois salve. Quando o GitHub terminar a publicação, o endereço do Pages aparecerá nessa tela.
-- **Localmente:** execute \`python -m http.server 8000\` na pasta do repositório e acesse \`http://localhost:8000\`.
-- Use um navegador moderno com suporte a \`DecompressionStream\`, \`localStorage\`, Canvas e Web Audio API.
+- **GitHub Pages:** no repositório, abra **Settings → Pages**, selecione **Deploy from a branch**, escolha a branch main e a pasta /(root), depois salve. Quando o GitHub terminar a publicação, o endereço do Pages aparecerá nessa tela.
+- **Localmente:** execute python -m http.server 8000 na pasta do repositório e acesse http://localhost:8000.
+- Use um navegador moderno com suporte a DecompressionStream, localStorage, Canvas e Web Audio API.
 
-Não abra a página por \`file://\`: o carregador precisa buscar os arquivos do pacote por HTTP.
+Não abra a página por file://: o carregador precisa buscar os arquivos do pacote por HTTP.
 
 ## O que tem
 
@@ -28,35 +28,22 @@ Não abra a página por \`file://\`: o carregador precisa buscar os arquivos do 
 
 ## Salvamento e privacidade
 
-O estado da cartela fica no \`localStorage\` do navegador e não é enviado para nenhum servidor. Use **Exportar dados** para criar um JSON de backup ou transferir o progresso para outro dispositivo.
+O estado da cartela fica no localStorage do navegador e não é enviado para nenhum servidor. Use **Exportar dados** para criar um JSON de backup ou transferir o progresso para outro dispositivo.
 
 ## Restaurar os arquivos-fonte
 
-Para obter os arquivos HTML, CSS, JavaScript e SVG separados numa pasta \`source/\`, instale o Node.js e execute na raiz do repositório:
+Para obter os arquivos HTML, CSS, JavaScript e SVG separados numa pasta source/, instale o Node.js e execute na raiz do repositório:
 
-\`\`\`bash
+```bash
 node tools/unpack.mjs
-\`\`\`
+```
 
 Também é possível indicar outra pasta de destino:
 
-\`\`\`bash
+```bash
 node tools/unpack.mjs ./meus-fontes
-\`\`\`
+```
 
-A estrutura restaurada contém:
+A estrutura restaurada contém index.html, assets/neurobingo.svg, css/styles.css, js/app.js, js/audio.js e js/minigames.js.
 
-\`\`\`text
-source/
-├── index.html
-├── assets/
-│   └── neurobingo.svg
-├── css/
-│   └── styles.css
-└── js/
-    ├── app.js
-    ├── audio.js
-    └── minigames.js
-\`\`\`
-
-Os dados originais são armazenados em partes compactadas em \`assets/bundle/\`; o carregador da raiz monta o jogo para publicação no GitHub Pages.
+Os dados originais são armazenados em partes compactadas em assets/bundle/; o carregador da raiz monta o jogo para publicação no GitHub Pages.
